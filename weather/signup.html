@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Login &amp; signup form</title>
+
+</head>
+<body>
+<style>
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
+		* {
+		  margin: 0;
+		  padding: 0;
+		  box-sizing: border-box;
+		  font-family: "Poppins", sans-serif;
+		}
+	html,
+	body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+		.container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+
+        .container h2 {
+            margin-bottom: 20px;
+            color: #535C91;
+        }
+
+        .container input[type="text"],
+        .container input[type="password"],
+        .container input[type="email"],
+        .container button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .container button {
+            background-color: #070F2B;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .container button:hover {
+            background-color: #1B1A55;
+        }
+		
+		.toggle-btn {
+            background-color: #f9f9f9;
+            color: #535C91;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            text-decoration: underline;
+        }
+
+        .toggle-btn:hover {
+            color: #070F2B;
+        }
+
+       nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to right, #a8dadc, #457b9d);
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu {
+            display: flex;
+        }
+
+        .menu a {
+			color: #fff;
+			text-decoration: none;
+			margin: 0 20px;
+			font-size: 12px;
+			text-transform: uppercase;
+			transition: color 0.3s, text-shadow 0.3s;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.menu a span {
+			margin-top: 5px;
+		}
+
+		
+		.menu a img {
+			width: 35px;
+			height: 35px;
+		}
+
+
+        .menu a:hover {
+            color: #ffeb3b;
+            text-shadow: 0 0 8px #ffeb3b;
+        }
+
+        .icons-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+			align-items: center;
+        }
+
+        .icons {
+            display: flex;
+            align-items: center;
+			margin-left: -110px;
+        }
+
+        .icons img {
+            width: 35px;
+            height: 35px;
+            margin: 0 15px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .icons img:hover {
+            transform: scale(1.1);
+        }
+
+        .user-icon {
+            margin-left: auto;
+			display: flex;
+			align-items: center;
+        }
+
+        .user-icon img {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .user-icon img:hover {
+            transform: scale(1.1);
+        }
+
+	::selection {
+	  background: #1a75ff;
+	  color: #fff;
+	}
+	.wrapper {
+	  overflow: hidden;
+	  max-width: 390px;
+	  background: #fff;
+	  padding: 30px;
+	  border-radius: 15px;
+	  box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
+	  align-items: center;
+	}
+	.wrapper .title-text {
+	  display: flex;
+	  width: 200%;
+	}
+	.wrapper .title {
+	  width: 50%;
+	  font-size: 35px;
+	  font-weight: 600;
+	  text-align: center;
+	  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	}
+	.wrapper .slide-controls {
+	  position: relative;
+	  display: flex;
+	  height: 50px;
+	  width: 100%;
+	  overflow: hidden;
+	  margin: 30px 0 10px 0;
+	  justify-content: space-between;
+	  border: 1px solid lightgrey;
+	  border-radius: 15px;
+	}
+	.slide-controls .slide {
+	  height: 100%;
+	  width: 100%;
+	  color: #fff;
+	  font-size: 18px;
+	  font-weight: 500;
+	  text-align: center;
+	  line-height: 48px;
+	  cursor: pointer;
+	  z-index: 1;
+	  transition: all 0.6s ease;
+	}
+	.slide-controls label.signup {
+	  color: #000;
+	}
+	.slide-controls .slider-tab {
+	  position: absolute;
+	  height: 100%;
+	  width: 50%;
+	  left: 0;
+	  z-index: 0;
+	  border-radius: 15px;
+	  background: -webkit-linear-gradient(left, #003366, #004080, #0059b3, #0073e6);
+	  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	}
+	input[type="radio"] {
+	  display: none;
+	}
+	#signup:checked ~ .slider-tab {
+	  left: 50%;
+	}
+	#signup:checked ~ label.signup {
+	  color: #fff;
+	  cursor: default;
+	  user-select: none;
+	}
+	#signup:checked ~ label.login {
+	  color: #000;
+	}
+	#login:checked ~ label.signup {
+	  color: #000;
+	}
+	#login:checked ~ label.login {
+	  cursor: default;
+	  user-select: none;
+	}
+	.wrapper .form-container {
+	  width: 100%;
+	  overflow: hidden;
+	  text-align: center;
+	}
+	.form-container .form-inner {
+	  display: flex;
+	  width: 200%;
+	  text-align: center;
+	}
+	.form-container .form-inner form {
+	  width: 50%;
+	  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	  text-align: center;
+	}
+	.form-inner form .field {
+	  height: 50px;
+	  width: 100%;
+	  margin-top: 20px;
+	  text-align: center;
+	}
+	.form-inner form .field input {
+	  height: 100%;
+	  width: 100%;
+	  outline: none;
+	  padding-left: 15px;
+	  border-radius: 15px;
+	  border: 1px solid lightgrey;
+	  border-bottom-width: 2px;
+	  font-size: 17px;
+	  transition: all 0.3s ease;
+	}
+	.form-inner form .field input:focus {
+	  border-color: #1a75ff;
+	}
+	.form-inner form .field input::placeholder {
+	  color: #999;
+	  transition: all 0.3s ease;
+	}
+	form .field input:focus::placeholder {
+	  color: #1a75ff;
+	}
+	.form-inner form .pass-link {
+	  margin-top: 5px;
+	}
+	.form-inner form .signup-link {
+	  text-align: center;
+	  margin-top: 30px;
+	}
+	.form-inner form .pass-link a,
+	.form-inner form .signup-link a {
+	  color: #1a75ff;
+	  text-decoration: none;
+	}
+	.form-inner form .pass-link a:hover,
+	.form-inner form .signup-link a:hover {
+	  text-decoration: underline;
+	}
+	form .btn {
+	  height: 50px;
+	  width: 100%;
+	  border-radius: 15px;
+	  position: relative;
+	  overflow: hidden;
+	}
+	form .btn .btn-layer {
+	  height: 100%;
+	  width: 300%;
+	  position: absolute;
+	  left: -100%;
+	  background: -webkit-linear-gradient(
+		right,
+		#003366,
+		#004080,
+		#0059b3,
+		#0073e6
+	  );
+	  border-radius: 15px;
+	  transition: all 0.4s ease;
+	}
+	form .btn:hover .btn-layer {
+	  left: 0;
+	}
+	form .btn input[type="submit"] {
+	  height: 100%;
+	  width: 100%;
+	  z-index: 1;
+	  position: relative;
+	  background: none;
+	  border: none;
+	  color: #fff;
+	  padding-left: 0;
+	  border-radius: 15px;
+	  font-size: 20px;
+	  font-weight: 500;
+	  cursor: pointer;
+	}
+	
+	  footer {
+            background: linear-gradient(to right, #a8dadc, #457b9d);
+            color: #fff;
+            text-align: center;
+            padding: 12px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+
+
+</style>
+
+<nav>
+    <div class="home">
+        <a href="weather.php" onclick="redirectToHome()">
+            <img src="home.png" alt="Home" width="35" height="35"> 
+            <span>Home</span>
+        </a>
+        <a href="settings.php" onclick="redirectToProfileSettings()">
+            <img src="settings.png" alt="Settings" width="35" height="35"> 
+            <span>Settings</span>
+        </a>
+    </div>
+
+    <div class="icons-container">
+        <div class="icons">
+            <img src="sun.png" alt="Icon 1" width="35" height="35"> 
+            <img src="rain.png" alt="Icon 2" width="35" height="35"> 
+            <img src="snow.png" alt="Icon 3" width="35" height="35"> 
+        </div>
+    </div>
+
+    <div class="user-icon" onclick="openLoginPage()">
+        <img src="usericon.png" alt="User Icon" width="30" height="30"> 
+    </div>
+</nav>
+
+
+<div class="wrapper">
+  <div class="title-text">
+    <div class="title login">Log In </div>
+    <div class="title signup">Sign Up </div>
+  </div>
+  
+  
+  <div class="form-container">
+    <div class="slide-controls">
+      <input type="radio" name="slide" id="login" checked>
+      <input type="radio" name="slide" id="signup">
+      <label for="login" class="slide login">Log in</label>
+      <label for="signup" class="slide signup">Sign up</label>
+      <div class="slider-tab"></div>
+    </div>
+	
+	
+    <div class="form-inner">
+		<?php
+		if(isset($_POST["submit"])){
+			$name = $_POST["name"]
+			$email = $_POST["email"]
+			$password = $_POST["password"]
+		}
+	
+	
+      <form action="??????????" class="login">
+        <div class="field">
+          <input type="text" placeholder="Email Address" required>
+        </div>
+        <div class="field">
+          <input type="password" placeholder="Password" required>
+        </div>
+		
+		
+        <div class="pass-link"><a href="#">Forgot password?</a></div>
+        <div class="field btn">
+          <div class="btn-layer"></div>
+          <input type="submit" value="Log in">
+        </div>
+		
+        <div class="signup-link">Not a member? <a href="#">Sign up now</a></div>
+      </form>
+	  
+	  
+      <form action="???????" class="signup">
+        <div class="field">
+          <input type="text" placeholder="Name" required>
+        </div>
+        <div class="field">
+          <input type="password" placeholder="Email Address" required>
+        </div>
+        <div class="field">
+          <input type="password" placeholder="Password" required>
+        </div>
+        <div class="field btn">
+          <div class="btn-layer"></div>
+          <input type="submit" value="Sign up">
+        </div>
+      </form>
+	  
+	  
+    </div>
+  </div>
+</div>
+  <script>
+    const loginText = document.querySelector(".title-text .login");
+	const loginForm = document.querySelector("form.login");
+	const loginBtn = document.querySelector("label.login");
+	const signupBtn = document.querySelector("label.signup");
+	const signupLink = document.querySelector("form .signup-link a");
+	signupBtn.onclick = () => {
+	  loginForm.style.marginLeft = "-50%";
+	  loginText.style.marginLeft = "-50%";
+	};
+	loginBtn.onclick = () => {
+	  loginForm.style.marginLeft = "0%";
+	  loginText.style.marginLeft = "0%";
+	};
+	signupLink.onclick = () => {
+	  signupBtn.click();
+	  return false;
+	};
+  </script>
+  
+  <footer>
+    &copy; 2024 Weather Forecast for Turkish Cities
+</footer>
+
+</body>
+</html>
